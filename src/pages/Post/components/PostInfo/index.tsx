@@ -6,16 +6,34 @@ import {
   faComment,
 } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { useNavigate } from 'react-router-dom'
 
 import Banner from '../../../../components/Banner'
 import { PostInfoBannerLinksWrapper, PostInfoMain } from './styles'
 
-export function PostInfo() {
+interface PostInfoProps {
+  title: string
+  createdAtFormatted: string
+  totalOfcommentsFormatted: string
+  userLogin: string
+}
+export function PostInfo({
+  title,
+  userLogin,
+  createdAtFormatted,
+  totalOfcommentsFormatted,
+}: PostInfoProps) {
+  const navigate = useNavigate()
+
+  function handleGoBackNavagation() {
+    navigate(-1)
+  }
+
   return (
     <Banner>
       <PostInfoMain>
         <PostInfoBannerLinksWrapper>
-          <button>
+          <button onClick={handleGoBackNavagation}>
             <FontAwesomeIcon icon={faChevronLeft} />
             <span>voltar</span>
           </button>
@@ -26,21 +44,21 @@ export function PostInfo() {
         </PostInfoBannerLinksWrapper>
         <section>
           <Banner.Header>
-            <strong>JavaScript data types and data structures</strong>
+            <strong>{title}</strong>
           </Banner.Header>
 
           <Banner.Footer>
             <div>
               <FontAwesomeIcon icon={faGithub} />
-              <span>thaisvilarinho</span>
+              <span>{userLogin}</span>
             </div>
             <div>
               <FontAwesomeIcon icon={faCalendarDay} />
-              <span>Há 1 dia</span>
+              <span>{createdAtFormatted}</span>
             </div>
             <div>
               <FontAwesomeIcon icon={faComment} />
-              <span>5 comentários</span>
+              <span>{totalOfcommentsFormatted}</span>
             </div>
           </Banner.Footer>
         </section>

@@ -10,7 +10,11 @@ const searchFormSchema = z.object({
 
 type SearchFormInputs = z.infer<typeof searchFormSchema>
 
-export function SearchForm() {
+interface SearchFormProps {
+  onSearch: (query?: string) => Promise<void>
+}
+
+export function SearchForm({ onSearch }: SearchFormProps) {
   const {
     register,
     handleSubmit,
@@ -19,7 +23,9 @@ export function SearchForm() {
     resolver: zodResolver(searchFormSchema),
   })
 
-  function handleSearchContent() {}
+  async function handleSearchContent(data: SearchFormInputs) {
+    await onSearch(data.query)
+  }
 
   return (
     <form onSubmit={handleSubmit(handleSearchContent)}>

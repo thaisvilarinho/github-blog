@@ -4,6 +4,8 @@ export const BriefIssueCardContainer = styled.button`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  text-align: start;
+
   gap: 2rem;
   border-radius: 1rem;
 
@@ -29,7 +31,7 @@ export const BriefIssueCardContainer = styled.button`
       font-size: 2rem;
       font-weight: 700;
       line-height: 1.6;
-      max-width: 28.3rem;
+      width: 28.3rem;
     }
 
     span {
@@ -37,6 +39,8 @@ export const BriefIssueCardContainer = styled.button`
       font-size: 1.4rem;
       font-weight: 400;
       line-height: 1.6;
+      text-align: right;
+      width: 30%;
     }
   }
 

@@ -1,24 +1,45 @@
-import { BriefIssueCardContainer } from './styles'
+import { formatDistanceToNowStrict } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import { useNavigate } from 'react-router-dom'
 
-interface BriefIssueCardProps {
+import { BriefIssueCardContainer } from './styles'
+import { parseTextFromMarkDown } from '../../../../utils/parseTextFromMarkDown'
+import { slugify } from '../../../../utils/slugify'
+
+export interface BriefIssuePost {
+  number: number
   title: string
-  postedAt: string
-  briefMessage: string
+  created_at: string
+  body: string
 }
 
 export function BriefIssueCard({
+  number,
   title,
-  postedAt,
-  briefMessage,
-}: BriefIssueCardProps) {
+  created_at: createdAt,
+  body,
+}: BriefIssuePost) {
+  const navigate = useNavigate()
+  const createdAtFormatted =
+    'Há ' +
+    formatDistanceToNowStrict(new Date(createdAt), {
+      locale: ptBR,
+    })
+  const description = parseTextFromMarkDown(body)
+
+  function handleNavigateToPostBySlug() {
+    const slug = slugify(title)
+    navigate(`/post/${number}/${slug}`)
+  }
+
   return (
-    <BriefIssueCardContainer>
+    <BriefIssueCardContainer onClick={handleNavigateToPostBySlug}>
       <header>
         <strong>{title}</strong>
-        <span>{postedAt}</span>
+        <span>{createdAtFormatted}</span>
       </header>
 
-      <p>{briefMessage}</p>
+      <p>{description}</p>
     </BriefIssueCardContainer>
   )
 }

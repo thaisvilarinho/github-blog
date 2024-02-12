@@ -35,9 +35,9 @@ export const HomeContainer = styled.main`
 `
 
 export const IssuePosts = styled.div`
+  width: 86.4rem;
   display: grid;
-  grid-template-columns: 41.6rem 41.6rem;
-  grid-template-rows: 26rem 26rem;
+  grid-template-columns: 1fr 1fr;
 
   row-gap: 3.2rem;
   column-gap: 3.2rem;
